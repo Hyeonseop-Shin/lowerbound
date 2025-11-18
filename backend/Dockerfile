@@ -1,6 +1,6 @@
 # Multi-stage Dockerfile using uv for fast dependency installation
 
-FROM python:3.11-slim AS builder
+FROM python:3.15-rc-alpine3.22 AS builder
 
 # Install uv
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
@@ -16,7 +16,7 @@ COPY src ./src
 RUN uv pip install --system --no-cache .
 
 # Production image
-FROM python:3.11-slim
+FROM python:3.15-rc-alpine3.22
 
 # Set working directory
 WORKDIR /app
